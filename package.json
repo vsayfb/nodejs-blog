@@ -1,0 +1,39 @@
+{
+  "name": "nodejs-blog",
+  "version": "1.0.0",
+  "description": "Simple Nodejs Blog Application",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vsayfb/nodejs-blog.git"
+  },
+  "keywords": [
+    "blog",
+    "nodejs"
+  ],
+  "author": "vsay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vsayfb/nodejs-blog/issues"
+  },
+  "homepage": "https://github.com/vsayfb/nodejs-blog#readme",
+  "dependencies": {
+    "dotenv": "^15.0.1",
+    "express": "^4.17.2",
+    "hbs": "^4.2.0",
+    "mongoose": "^6.2.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.16.10",
+    "@babel/preset-env": "^7.16.11",
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
+    "regenerator-runtime": "^0.13.9",
+    "supertest": "^6.2.2"
+  }
+}
