@@ -23,12 +23,13 @@
   },
   "homepage": "https://github.com/vsayfb/nodejs-blog#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^15.0.1",
     "express": "^4.17.2",
     "hbs": "^4.2.0",
     "joi": "^17.6.0",
-    "mongoose": "^6.2.0",
-    "winston": "^3.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.16.10",

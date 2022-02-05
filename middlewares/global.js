@@ -1,16 +1,14 @@
 import user from "../routes/user.js";
-import express from "express";
+import { handleError, ErrorHandler } from "../utils/errors.js";
 
 export default (app) => {
   app.use("/user", user);
 
   app.use((req, res, next) => {
-    const err = new Error("Not Found");
-    err["status"] = 404;
-    next(err);
+    throw new ErrorHandler("Not Found!", 404);
   });
 
   app.use((err, req, res, next) => {
-    res.status(err.status).send(err.message);
+    handleError(res, err);
   });
 };

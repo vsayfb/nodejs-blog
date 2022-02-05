@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 import config from "../config/app.js";
+import logger from "../utils/logger.js";
 
 async function connectDB() {
   try {
     await mongoose.connect(config.databaseURI);
-    console.log("db connected.");
+    logger.console("db connected.");
   } catch (error) {
-    console.log(error);
+    logger.error("app", error.message);
+    logger.console(error);
     process.exit(1);
   }
 }
