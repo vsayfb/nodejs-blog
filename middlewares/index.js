@@ -1,4 +1,4 @@
-import global from "./global.js";
+import isAuth from "./isAuth.js";
 import validation from "./validation.js";
 
-export default { global, validation };
+export default { global, isAuth, validation };

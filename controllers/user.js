@@ -1,8 +1,6 @@
-import { async } from "regenerator-runtime";
+import UserEvent from "../events/user.js";
 import AuthService from "../services/auth.js";
 import UserService from "../services/user.js";
-import { ErrorHandler } from "../utils/errors.js";
-import eventEmitter from "../utils/events.js";
 
 export default class UserController {
   #service;
@@ -11,7 +9,7 @@ export default class UserController {
 
   constructor() {
     this.#service = new UserService();
-    this.#event = eventEmitter;
+    this.#event = new UserEvent();
     this.#auth = new AuthService();
   }
 
@@ -19,12 +17,12 @@ export default class UserController {
     try {
       const user = await this.#auth.signUp(req.body);
 
-      this.#event.emit("created", user);
+      this.#event.created(user);
 
       res.status(201).send("User created");
     } catch (error) {
-      this.#event.emit("error", error.message);
-      res.status(500).send("Internal Server Error!");
+      this.#event.appError(error.message);
+      next(error);
     }
   };
 
@@ -37,7 +35,7 @@ export default class UserController {
       return res.status(200).json({ user, token });
     } catch (error) {
       if (error.status === 400) this.#event.emit("not found", error.message);
-      else this.#event.emit("error", error.message);
+      else this.#event.appError(error.message);
       next(error);
     }
   };
