@@ -9,12 +9,12 @@ export default async (req, res, next) => {
 
   const token = authHeader && authHeader.split(" ")[0];
 
-  if (!token) {
-    event.error("Invalid token.");
-    throw new ErrorHandler("Invalid token!", 401);
-  }
-
   try {
+    if (!token) {
+      event.error("Invalid token.");
+      throw new ErrorHandler("Invalid token!", 401);
+    }
+
     await verifyToken(token);
     next();
   } catch (error) {

@@ -1,22 +1,26 @@
-import EventEmitter from "events";
 import logger from "../utils/logger.js";
 
 export default class CommonEvent {
-  #logger;
   constructor(model) {
     this.model = model;
-    this.#logger = logger;
+    this.logger = logger;
     this.model = model;
   }
 
   created = (data) => {
-    this.#logger.info(this.model, data);
+    this.logger.info(this.model, { type: "created", data });
+  };
+  deleted = (data) => {
+    this.logger.info(this.model, { type: "deleted", data });
   };
   error = (error) => {
-    this.#logger.error(this.model, error);
+    this.logger.error(this.model, error);
+  };
+  updated = (data) => {
+    this.logger.info(this.model, { type: "updated", data });
   };
 
   appError = (error) => {
-    this.#logger.error("app", error.message);
+    this.logger.error("app", error.message);
   };
 }

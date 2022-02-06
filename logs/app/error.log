@@ -1,2 +1,11 @@
 undefined
 undefined
+this[#event].emit is not a function
+Cast to ObjectId failed for value "61ffa77a8fab19e820ed635" (type string) at path "_id" for model "Article"
+Cast to ObjectId failed for value "61ffa77a8fab19e820ed635" (type string) at path "_id" for model "Article"
+Cast to ObjectId failed for value "61ffa77a8fab19e820ed635" (type string) at path "_id" for model "Article"
+Cannot populate path `user` because it is not in your schema. Set the `strictPopulate` option to false to override.
+Cannot read properties of undefined (reading 'type')
+Cannot read properties of undefined (reading 'role')
+Cannot read properties of undefined (reading 'role')
+Cast to ObjectId failed for value "61ffb29a5ca71df9260e07d" (type string) at path "_id" for model "Article"

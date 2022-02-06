@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { ErrorHandler } from "./errors.js";
+import config from "../config/app.js";
 
 export function generateToken(user) {
   const { _id, role, name } = user;
@@ -7,7 +8,7 @@ export function generateToken(user) {
   return new Promise((resolve, reject) => {
     jwt.sign(
       { user: { _id, role, name } },
-      "ssshh very secret",
+      config.jwtSecret,
       (err, encoded) => {
         if (err) reject(err);
         resolve(encoded);
@@ -18,7 +19,7 @@ export function generateToken(user) {
 
 export function verifyToken(token) {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, "ssshh very secret", (err, decoded) => {
+    jwt.verify(token, config.jwtSecret, (err, decoded) => {
       if (err) {
         reject(new ErrorHandler("Invalid Token!", 401));
       }

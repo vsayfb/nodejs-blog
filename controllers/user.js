@@ -13,29 +13,27 @@ export default class UserController {
     this.#auth = new AuthService();
   }
 
-  create = async (req, res, next) => {
+  register = async (req, res, next) => {
     try {
       const user = await this.#auth.signUp(req.body);
 
-      this.#event.created(user);
-
       res.status(201).send("User created");
+
+      this.#event.signUp(user);
     } catch (error) {
-      this.#event.appError(error.message);
       next(error);
     }
   };
 
-  signIn = async (req, res, next) => {
+  login = async (req, res, next) => {
     try {
       const { user, token } = await this.#auth.signIn(req.body);
 
-      this.#event.emit("signIn", user);
+      this.#event.signIn(user);
 
       return res.status(200).json({ user, token });
     } catch (error) {
       if (error.status === 400) this.#event.emit("not found", error.message);
-      else this.#event.appError(error.message);
       next(error);
     }
   };
