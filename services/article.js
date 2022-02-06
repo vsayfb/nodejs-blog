@@ -28,7 +28,6 @@ export default class ArticleService {
   }
 
   async update(_id, data) {
-    console.log(data);
     return await Article.findByIdAndUpdate(_id, data, { new: true });
   }
 }

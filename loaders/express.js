@@ -2,6 +2,7 @@ import express from "express";
 import { ErrorHandler, handleError } from "../utils/errors.js";
 import user from "../routes/user.js";
 import article from "../routes/article.js";
+import tag from "../routes/tag.js";
 
 export default (app) => {
   app.set("view engine", "hbs");
@@ -15,6 +16,8 @@ export default (app) => {
   app.use("/user", user);
 
   app.use("/article", article);
+
+  app.use("/tag", tag);
 
   app.use((req, res, next) => {
     throw new ErrorHandler("Not Found!", 404);
