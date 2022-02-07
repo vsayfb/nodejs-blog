@@ -1,6 +1,7 @@
 import UserEvent from "../events/user.js";
 import AuthService from "../services/auth.js";
 import UserService from "../services/user.js";
+import { generateToken } from "../utils/token.js";
 
 export default class UserController {
   #service;
@@ -17,7 +18,11 @@ export default class UserController {
     try {
       const user = await this.#auth.signUp(req.body);
 
-      res.status(201).send("User created");
+      const token = await generateToken(user);
+
+      res.cookie("token", token);
+
+      res.status(201).send("User Created!");
 
       this.#event.signUp(user);
     } catch (error) {
@@ -27,9 +32,9 @@ export default class UserController {
 
   login = async (req, res, next) => {
     try {
-      const { user, token } = await this.#auth.signIn(req.body);
+      const { user, token } = await this.#auth.login(req.body);
 
-      this.#event.signIn(user);
+      this.#event.login(user);
 
       return res.status(200).json({ user, token });
     } catch (error) {

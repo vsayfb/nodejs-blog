@@ -21,7 +21,10 @@ function write(type, folderName, message) {
 
 const logger = {
   info: (folderName, message) => write("info", folderName, message),
-  error: (folderName, message) => write("error", folderName, message),
+  error: (folderName, message) => {
+    write("error", folderName, message);
+    logger.console(message);
+  },
   console: (message) => {
     if (process.env.NODE_ENV !== "production") {
       process.stdout.write(message + "\n");

@@ -10,27 +10,29 @@ export default class ArticleController {
     this.#event = new ArticleEvent();
   }
 
-  get = async (req, res, next) => {
-    try {
-      const article = await this.#service.read(req.params.id);
-
-      res.status(200).send(article);
-    } catch (error) {
-      next(error);
-    }
-  };
   create = async (req, res, next) => {
     try {
       const article = await this.#service.save(req.body);
 
-      this.#event.created(article);
+      res.status(201).send(article._id);
 
-      res.status(201).send(article);
+      this.#event.created(article);
     } catch (error) {
       next(error);
     }
   };
-  remove = async (req, res, next) => {
+  read = async (req, res, next) => {
+    try {
+      const article = await this.#service.read(req.params.id);
+
+      res
+        .status(200)
+        .render("article", { article, title: article.displayTitle });
+    } catch (error) {
+      next(error);
+    }
+  };
+  delete = async (req, res, next) => {
     try {
       const article = await this.#service.remove({
         _id: req.params.id,

@@ -11,7 +11,7 @@ export default class AuthService {
     return await this.#userService.save({ ...data, password });
   };
 
-  signIn = async (data) => {
+  login = async (data) => {
     const { name, password } = data;
 
     const user = await this.#userService.findOne({

@@ -7,8 +7,12 @@ const router = express.Router();
 
 const user = new UserController();
 
-router.post("/signUp", middlewares.validation(createUserValidate), user.register);
+router.post(
+  "/signUp",
+  middlewares.validation(createUserValidate),
+  user.register
+);
 
-router.post("/signIn", user.login);
+router.post("/login", user.login);
 
 export default router;

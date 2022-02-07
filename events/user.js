@@ -4,8 +4,8 @@ export default class UserEvent extends CommonEvent {
   constructor() {
     super("user");
   }
-  signIn = (data) => {
-    this.logger.info("user/auth", { type: "signIn", data });
+  login = (data) => {
+    this.logger.info("user/auth", { type: "login", data });
   };
   signUp = (data) => {
     this.logger.info("user/auth", { type: "signUp", data });
