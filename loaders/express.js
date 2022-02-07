@@ -29,6 +29,8 @@ export default (app) => {
 
   app.use(express.static(path.join(path.resolve() + "/public")));
 
+  app.use(express.static(path.join(path.resolve() + "/uploads")));
+
   app.use(appRoutes);
 
   app.use("/user", user);

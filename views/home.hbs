@@ -3,7 +3,10 @@
 
     {{#each articles}}
       <div class="card me-4 mb-4" style="width: 21.5rem;">
-        {{! <img src="..." class="card-img-top" alt="..." /> }}
+        {{#if images.article}}
+          <img src="{{images.article}}" class="card-img-top" alt="Not Found!" />
+
+        {{/if}}
         <div class="card-body">
           <h5 class="card-title">{{displayTitle}}</h5>
           <p class="card-text">{{description}}</p>

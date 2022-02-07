@@ -12,7 +12,7 @@ export default class ArticleController {
 
   create = async (req, res, next) => {
     try {
-      const article = await this.#service.save(req.body);
+      const article = await this.#service.save({ ...req.body, ...req.files });
 
       res.status(201).send(article._id);
 
