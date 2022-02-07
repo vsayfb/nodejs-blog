@@ -20,6 +20,22 @@ route.get("/", middlewares.checkToken, async (req, res, next) => {
 });
 
 route.get(
+  "/login",
+  (req, res, next) => {
+    const { token } = req.cookies;
+    if (token) {
+      jsonwebtoken.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) return next();
+        else return res.redirect("/");
+      });
+    } else next();
+  },
+  (req, res, next) => {
+    res.render("login", { title: "Log In" });
+  }
+);
+
+route.get(
   "/signUp",
   (req, res, next) => {
     const { token } = req.cookies;

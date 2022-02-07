@@ -36,7 +36,9 @@ export default class UserController {
 
       this.#event.login(user);
 
-      return res.status(200).json({ user, token });
+      res.cookie("token", token);
+
+      return res.status(200).send("Success.");
     } catch (error) {
       if (error.status === 400) this.#event.emit("not found", error.message);
       next(error);
