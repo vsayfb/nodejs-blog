@@ -61,11 +61,29 @@ route.get("/addArticle", middlewares.routeProtection, (req, res, next) => {
   const { token, user } = res.locals;
 
   res.render("addArticle", {
+    layout: "dashboard",
     title: "Add Article",
     user,
     token,
   });
 });
+
+route.get(
+  "/dashboard/:user",
+  middlewares.routeProtection,
+  async (req, res, next) => {
+    const { user } = res.locals;
+
+    const articles = await new ArticleService().getAuthorArticles(user._id);
+
+    res.render("authorPanel", {
+      layout: "dashboard",
+      title: "Dashboard",
+      articles,
+      user,
+    });
+  }
+);
 
 route.get("/logout", (req, res, next) => {
   res.clearCookie("token");

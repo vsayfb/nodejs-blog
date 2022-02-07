@@ -40,7 +40,7 @@ export default (app) => {
   app.use("/tag", tag);
 
   app.use((req, res, next) => {
-    throw new ErrorHandler("Not Found!", 404);
+    res.render("404");
   });
 
   app.use((err, req, res, next) => {

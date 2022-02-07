@@ -1,34 +1,28 @@
-<div
-  class="container d-flex justify-content-center align-items-center"
-  style="height: 80vh;"
->
-  <form class="w-50" onsubmit="addArticle(event)" id="addArticle">
-    <h1 class="text-center mb-3">Add Article</h1>
+<form onsubmit="addArticle(event)" id="addArticle">
 
-    <input type="hidden" name="author" value="{{user._id}}" />
+  <input type="hidden" name="author" value="{{user._id}}" />
 
-    <div class="mb-3">
-      <label for="displayTitle" class="form-label">Post Title</label>
-      <input type="text" class="form-control" name="displayTitle" />
-    </div>
+  <div class="mb-3">
+    <label for="displayTitle" class="form-label">Post Title</label>
+    <input type="text" class="form-control" name="displayTitle" />
+  </div>
 
-    <div class="mb-3">
-      <label for="articleImage" class="form-label">Article Image</label>
-      <input type="file" name="articleImage" class="form-control" />
-    </div>
+  <div class="mb-3">
+    <label for="articleImage" class="form-label">Article Image</label>
+    <input type="file" name="articleImage" class="form-control" />
+  </div>
 
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea class="form-control" name="description">
-      </textarea>
-    </div>
-    <div class="mb-3">
-      <label for="content" class="form-label">Content</label>
-      <textarea class="form-control" name="content">
-      </textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" name="description">
+    </textarea>
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea class="form-control" name="content">
+    </textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
 <script src="/js/addArticle.js"></script>

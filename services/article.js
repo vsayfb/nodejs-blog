@@ -48,6 +48,10 @@ export default class ArticleService {
     return await Article.findByIdAndUpdate(_id, data, { new: true });
   }
 
+  async getAuthorArticles(author) {
+    return Article.find({ author }).lean();
+  }
+
   async getAll() {
     return Article.find({})
       .lean()

@@ -1,0 +1,29 @@
+<table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Display Title</th>
+      <th scope="col">Last</th>
+    </tr>
+  </thead>
+  <tbody id="articles">
+    {{#each articles}}
+      <tr data-id={{_id}}>
+        <th scope="row">{{@index}}</th>
+        <td><a
+            href="/article/{{_id}}"
+            class="list-group-item"
+            target="_blank"
+          >{{displayTitle}}</a></td>
+        <td>
+          <button class="btn btn-warning">Update</button>
+          <button
+            class="btn btn-danger"
+            onclick="deleteArticle('{{_id}}')"
+          >Delete</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

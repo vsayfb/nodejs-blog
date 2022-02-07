@@ -38,9 +38,9 @@ export default class ArticleController {
         _id: req.params.id,
       });
 
-      this.#event.deleted(article);
+      res.status(200).send(article._id);
 
-      res.status(200).send("Article Deleted!");
+      this.#event.deleted(article);
     } catch (error) {
       console.log(error);
       next(error);

@@ -3,13 +3,17 @@ import { ErrorHandler } from "./errors.js";
 import config from "../config/app.js";
 
 export function generateToken(user) {
-  const { _id, role, displayName } = user;
+  const { _id, role, displayName, lastLogin, createdAt } = user;
 
   return new Promise((resolve, reject) => {
-    jwt.sign({ _id, role, displayName }, config.jwtSecret, (err, encoded) => {
-      if (err) reject(err);
-      resolve(encoded);
-    });
+    jwt.sign(
+      { _id, role, displayName, lastLogin, createdAt },
+      config.jwtSecret,
+      (err, encoded) => {
+        if (err) reject(err);
+        resolve(encoded);
+      }
+    );
   });
 }
 

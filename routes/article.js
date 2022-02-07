@@ -7,7 +7,7 @@ const route = Router();
 
 const article = new ArticleController();
 
-route.get("/:id", article.read);
+route.get("/:id", middlewares.checkToken, article.read);
 
 route.post(
   "/new",
@@ -16,10 +16,10 @@ route.post(
   article.create
 );
 
-route.delete("/delete/:id/", middlewares.isAuth, article.delete);
+route.delete("/:id/", middlewares.isAuth, article.delete);
 
 route.patch(
-  "/update/:id",
+  "/:id",
   middlewares.isAuth,
   middlewares.validation(createArticleValidate),
   article.update
