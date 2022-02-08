@@ -1,34 +1,43 @@
-<form onsubmit="addArticle(event)" id="addArticle">
+<form onsubmit="updateArticle(event) " id="updateArticle">
 
+  <input type="hidden" id="articleId" value="{{article._id}}" />
   <input type="hidden" name="author" value="{{user._id}}" />
 
   <div class="mb-3">
     <label for="displayTitle" class="form-label">Article Display Title</label>
-    <input type="text" class="form-control" name="displayTitle" />
+    <input
+      type="text"
+      class="form-control"
+      name="displayTitle"
+      value="{{article.displayTitle}}"
+    />
   </div>
 
   <div class="mb-3">
     <label for="articleImage" class="form-label">Article Image</label>
+    {{#if article.images.title}}
+      <div>
+        <span>Current : </span>
+        <div> <a href="/{{article.images.article}}"></a> </div>
+      </div>
+    {{/if}}
     <input type="file" name="articleImage" class="form-control" />
   </div>
 
   <div class="mb-3">
     <label for="description" class="form-label">Description</label>
     <textarea class="form-control" name="description">
+      {{article.description}}
     </textarea>
   </div>
 
-  {{#each tags}}
-    <input type="checkbox" name="tags" value="{{_id}}" />
-    <span onclick="chooseTag(event)"> {{text}}</span>
-  {{/each}}
+  {{{checkedIf tags article.tags}}}
 
   <div class="mb-3">
     <label for="content" class="form-label">Content</label>
     <textarea class="form-control" name="content">
+      {{article.content}}
     </textarea>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
-<script src="/js/addArticle.js"></script>

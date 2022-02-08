@@ -2,6 +2,7 @@ import { Router } from "express";
 import ArticleService from "../services/article.js";
 import middlewares from "../middlewares/index.js";
 import jsonwebtoken from "jsonwebtoken";
+import TagService from "../services/tag.js";
 const route = Router();
 
 route.get("/", middlewares.checkToken, async (req, res, next) => {
@@ -57,16 +58,23 @@ route.get("/addTag", middlewares.routeProtection, (req, res, next) => {
   res.render("addTag", { title: "Add Tag", token, user });
 });
 
-route.get("/addArticle", middlewares.routeProtection, (req, res, next) => {
-  const { token, user } = res.locals;
+route.get(
+  "/addArticle",
+  middlewares.routeProtection,
+  async (req, res, next) => {
+    const { token, user } = res.locals;
 
-  res.render("addArticle", {
-    layout: "dashboard",
-    title: "Add Article",
-    user,
-    token,
-  });
-});
+    const tags = await new TagService().getAll();
+
+    res.render("addArticle", {
+      layout: "dashboard",
+      title: "Add Article",
+      user,
+      tags,
+      token,
+    });
+  }
+);
 
 route.get(
   "/dashboard/:user",
@@ -82,6 +90,27 @@ route.get(
       articles,
       user,
     });
+  }
+);
+
+route.get(
+  "/update/:article",
+  middlewares.routeProtection,
+  async (req, res, next) => {
+    try {
+      const currentArticle = await new ArticleService().read(
+        req.params.article
+      );
+
+      res.render("updateArticle", {
+        layout: "dashboard",
+        title: `Update ${currentArticle.displayTitle}`,
+        article: currentArticle,
+        tags: await new TagService().getAll(),
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 );
 

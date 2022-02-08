@@ -1,25 +1,20 @@
 import express from "express";
 import path from "path";
 import fileUpload from "express-fileupload";
-import { ErrorHandler, handleError } from "../utils/errors.js";
+import { handleError } from "../utils/errors.js";
 import cookieParser from "cookie-parser";
 import user from "../routes/user.js";
 import article from "../routes/article.js";
 import tag from "../routes/tag.js";
 import appRoutes from "../routes/app.js";
 import hbs from "express-handlebars";
-import { verifyToken } from "../utils/token.js";
+import hbsHelpers from "../helpers/hbsHelpers.js";
+import loadTags from "../helpers/loadTags.js";
 
 export default (app) => {
   app.set("view engine", "hbs");
 
-  const helpers = {
-    toDate: (date) => new Date(date).toDateString(),
-    isDefined: (value) => value != undefined,
-    isNotDefined: (value) => value == undefined,
-  };
-
-  app.engine("hbs", hbs.engine({ extname: ".hbs", helpers }));
+  app.engine("hbs", hbs.engine({ extname: ".hbs", helpers: hbsHelpers }));
 
   app.use(express.json());
 
@@ -31,6 +26,8 @@ export default (app) => {
 
   app.use(express.static(path.join(path.resolve() + "/uploads")));
 
+  loadTags();
+
   app.use(appRoutes);
 
   app.use("/user", user);
@@ -40,7 +37,7 @@ export default (app) => {
   app.use("/tag", tag);
 
   app.use((req, res, next) => {
-    res.render("404");
+    res.status(404).render("404");
   });
 
   app.use((err, req, res, next) => {

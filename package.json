@@ -32,7 +32,8 @@
     "express-session": "^1.17.2",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.0"
+    "mongoose": "^6.2.0",
+    "node-html-parser": "^5.2.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.16.10",

@@ -18,3 +18,21 @@ function deleteArticle(_id) {
   };
   xhttp.send();
 }
+
+function updateArticle(e) {
+  e.preventDefault();
+
+  const articleId = document.getElementById("articleId").value;
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("PATCH", `/article/${articleId}`);
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4) {
+      if (this.status === 200) {
+        window.location = `/article/${this.responseText.replace(/"/g, "")}`;
+      }
+      console.log(this.response);
+    }
+  };
+  xhttp.send(new FormData(e.target));
+}

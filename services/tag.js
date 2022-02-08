@@ -25,4 +25,12 @@ export default class TagService {
   async update(_id, data) {
     return await Tag.findByIdAndUpdate(_id, data, { new: true });
   }
+
+  getAll() {
+    return Tag.find().lean();
+  }
+
+  addMany(docs) {
+    return Tag.insertMany(docs);
+  }
 }

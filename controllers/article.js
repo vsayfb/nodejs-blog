@@ -47,10 +47,15 @@ export default class ArticleController {
     }
   };
   update = async (req, res, next) => {
-    try {
-      const article = await this.#service.update(req.params.id, req.body);
+    const articleImage = req.files ? req.files.articleImage : undefined;
 
-      res.status(200).send(article);
+    try {
+      const article = await this.#service.update(req.params.id, {
+        ...req.body,
+        articleImage,
+      });
+
+      res.status(200).send(article._id);
 
       this.#event.updated(article);
     } catch (error) {

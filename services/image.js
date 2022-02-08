@@ -25,4 +25,25 @@ export default class ImageService {
       });
     });
   }
+  update(dbImage, currentImage) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        // The user did not change the image.
+        if ((dbImage && !currentImage) || (!dbImage && !currentImage))
+          resolve(dbImage);
+
+        // The article did not have the image. The user added an image to it.
+        if (!dbImage && currentImage) resolve(await this.upload(currentImage));
+
+        // The user changed the current image.
+        if (currentImage) {
+          await this.remove(dbImage);
+          const newImage = await this.upload(currentImage);
+          resolve(newImage);
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }

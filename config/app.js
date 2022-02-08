@@ -11,6 +11,8 @@ if (env.error) {
 export default {
   port: parseInt(process.env.PORT, 10),
 
+  loadCustomTag: process.env.LOAD_CUSTOM_TAG,
+
   databaseURI: process.env.DB_URI,
 
   jwtSecret: process.env.JWT_SECRET,

@@ -1,19 +1,19 @@
 import Article from "../models/article.js";
 import { ErrorHandler } from "../utils/errors.js";
-import UserService from "./user.js";
 import ImageService from "./image.js";
+import manipulateTagsField from "../helpers/manipulateTagsField.js";
 
 export default class ArticleService {
-  #userService = new UserService();
   #image = new ImageService();
 
   async read(_id) {
     const article = await Article.findById(_id)
-      .select("content author _id displayTitle")
+      .select("content author _id displayTitle description")
       .lean()
-      .populate("author", {
-        displayName: 1,
-      });
+      .populate([
+        { path: "author", select: { displayName: 1 } },
+        { path: "tags" },
+      ]);
 
     if (!article) throw new ErrorHandler("Article Not Found!", 400);
 
@@ -45,7 +45,24 @@ export default class ArticleService {
   }
 
   async update(_id, data) {
-    return await Article.findByIdAndUpdate(_id, data, { new: true });
+    const article = await Article.findById(_id);
+
+    const image = await this.#image.update(
+      article.images.article,
+      data.articleImage
+    );
+
+    // update changed fields
+    for (const prop in data) {
+      article[prop] = data[prop];
+    }
+
+    const tags = manipulateTagsField(data.tags);
+
+    article.tags = tags;
+    article.images.article = image;
+
+    return await article.save();
   }
 
   async getAuthorArticles(author) {
