@@ -15,5 +15,9 @@ export default (req, res, next) => {
         next();
       }
     });
-  } else next();
+  } else {
+    res.locals.token = undefined;
+    res.locals.user = undefined;
+    next();
+  }
 };

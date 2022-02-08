@@ -24,7 +24,15 @@ class AddComment extends React.Component {
           { className: "form-label", htmlFor: "text" },
           "Your comment."
         ),
-
+        e(
+          "input",
+          {
+            type: "hidden",
+            name: "user",
+            value: document.getElementById("userId").value,
+          },
+          null
+        ),
         e("textarea", {
           className: "form-control",
           name: "text",

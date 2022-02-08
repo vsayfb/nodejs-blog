@@ -25,9 +25,11 @@ export default class ArticleController {
     try {
       const article = await this.#service.read(req.params.id);
 
-      res
-        .status(200)
-        .render("article", { article, title: article.displayTitle });
+      res.status(200).render("article", {
+        article,
+        title: article.displayTitle,
+        user: res.locals.user,
+      });
     } catch (error) {
       next(error);
     }
@@ -48,8 +50,6 @@ export default class ArticleController {
   };
   update = async (req, res, next) => {
     const articleImage = req.files ? req.files.articleImage : undefined;
-
-    console.log(req.body);
 
     try {
       const article = await this.#service.update(req.params.id, {

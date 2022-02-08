@@ -6,7 +6,7 @@ const route = Router();
 
 const app = new AppController();
 
-route.get("/", middlewares.checkToken, app.home);
+route.get("/", middlewares.detectUser, app.home);
 
 route.get("/login", middlewares.verifyAuth, app.login);
 
