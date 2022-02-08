@@ -19,4 +19,26 @@ export default class CommentController {
       next(error);
     }
   };
+
+  delete = async (req, res, next) => {
+    try {
+      await this.#service.remove(req.headers.comment);
+
+      res.status(200).send("Deleted.");
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getArticleComments = async (req, res, next) => {
+    try {
+      const comments = await this.#service.findArticleComments(
+        req.headers.article
+      );
+
+      return res.status(200).send(comments);
+    } catch (error) {
+      next(error);
+    }
+  };
 }

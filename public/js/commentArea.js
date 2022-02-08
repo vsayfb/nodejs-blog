@@ -1,15 +1,48 @@
 const e = React.createElement;
 
+var authorId = document.getElementById("userId").value;
+
+var articleId = document.getElementById("articleId").value;
+
 class Comments extends React.Component {
   constructor(props) {
     super(props);
     this.state = { comments: [] };
   }
 
+  fetchComments() {
+    return new Promise((resolve, reject) => {
+      const xhttp = new XMLHttpRequest();
+
+      xhttp.open("GET", "/comment/articleComments");
+
+      xhttp.setRequestHeader("article", articleId);
+
+      xhttp.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            return resolve(JSON.parse(this.response));
+          }
+        }
+      };
+
+      xhttp.send();
+    });
+  }
+  componentDidMount() {
+    (async () => {
+      const comments = await this.fetchComments();
+
+      console.log(comments);
+
+      this.setState((prev) => ({ ...prev, comments }));
+    })();
+  }
+
   render() {
     const { comments } = this.state;
 
-    console.log(comments);
+    let setState = this.setState.bind(this);
 
     return e(
       "div",
@@ -22,7 +55,7 @@ class Comments extends React.Component {
               return e(
                 "div",
                 {
-                  className: "p-2 border",
+                  className: "p-2 border mt-3",
                   key: c._id,
                 },
                 e("div", null, c.author.displayName),
@@ -32,7 +65,13 @@ class Comments extends React.Component {
                     className: "m-0 mt-2",
                   },
                   c.text
-                )
+                ),
+                authorId === c.author._id
+                  ? e(RemoveComment, {
+                      removeComment: setState,
+                      comment: c._id,
+                    })
+                  : null
               );
             })
           )
@@ -107,7 +146,7 @@ class AddComment extends React.Component {
           {
             type: "hidden",
             name: "author",
-            value: document.getElementById("userId").value,
+            value: authorId,
           },
           null
         ),
@@ -116,7 +155,7 @@ class AddComment extends React.Component {
           {
             type: "hidden",
             name: "article",
-            value: document.getElementById("articleId").value,
+            value: articleId,
           },
           null
         ),
@@ -132,6 +171,63 @@ class AddComment extends React.Component {
           { type: "submit", className: "btn btn-warning mt-3" },
           "Comment"
         )
+      )
+    );
+  }
+}
+
+class RemoveComment extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null };
+  }
+
+  remove() {
+    const { removeComment, comment } = this.props;
+
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.open("DELETE", "/comment");
+
+    xhttp.setRequestHeader("comment", comment);
+
+    xhttp.onreadystatechange = () => {
+      if (xhttp.readyState === 4) {
+        if (xhttp.status === 200) {
+          removeComment((prev) => {
+            return {
+              ...prev,
+              comments: prev.comments.filter((c) => c._id !== comment),
+            };
+          });
+        } else {
+          this.setState((prev) => {
+            return { ...prev, error: xhttp.responseText };
+          });
+
+          setTimeout(() => {
+            this.setState((prev) => {
+              return { ...prev, error: null };
+            });
+          }, 3000);
+        }
+      }
+    };
+
+    xhttp.send();
+  }
+
+  render() {
+    return e(
+      "div",
+      {},
+      this.state.error
+        ? e("div", { className: "text-danger mb-2" }, this.state.error)
+        : null,
+      e(
+        "button",
+        { className: "btn btn-danger", onClick: () => this.remove() },
+        "Delete"
       )
     );
   }
