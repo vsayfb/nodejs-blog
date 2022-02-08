@@ -1,122 +1,25 @@
 import { Router } from "express";
-import ArticleService from "../services/article.js";
 import middlewares from "../middlewares/index.js";
-import jsonwebtoken from "jsonwebtoken";
-import TagService from "../services/tag.js";
+import AppController from "../controllers/app.js";
+
 const route = Router();
 
-route.get("/", middlewares.checkToken, async (req, res, next) => {
-  try {
-    const articles = await new ArticleService().getAll();
+const app = new AppController();
 
-    res.status(200).render("home", {
-      articles,
-      title: "Blog App",
-      token: res.locals.token,
-      user: res.locals.user,
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+route.get("/", middlewares.checkToken, app.home);
 
-route.get(
-  "/login",
-  (req, res, next) => {
-    const { token } = req.cookies;
-    if (token) {
-      jsonwebtoken.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) return next();
-        else return res.redirect("/");
-      });
-    } else next();
-  },
-  (req, res, next) => {
-    res.render("login", { title: "Log In" });
-  }
-);
+route.get("/login", middlewares.verifyAuth, app.home);
 
-route.get(
-  "/signUp",
-  (req, res, next) => {
-    const { token } = req.cookies;
-    if (token) {
-      jsonwebtoken.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) return next();
-        else return res.redirect("/");
-      });
-    } else next();
-  },
-  (req, res, next) => {
-    res.render("signUp", { title: "Sign Up" });
-  }
-);
+route.get("/signUp", middlewares.verifyAuth, app.signUp);
 
-route.get("/addTag", middlewares.routeProtection, (req, res, next) => {
-  const { token, user } = res.locals;
+route.get("/addTag", middlewares.routeProtection, app.addTag);
 
-  res.render("addTag", { title: "Add Tag", token, user });
-});
+route.get("/addArticle", middlewares.routeProtection, app.addArticle);
 
-route.get(
-  "/addArticle",
-  middlewares.routeProtection,
-  async (req, res, next) => {
-    const { token, user } = res.locals;
+route.get("/dashboard/:user", middlewares.routeProtection, app.dashboard);
 
-    const tags = await new TagService().getAll();
+route.get("/update/:article", middlewares.routeProtection, app.updateArticle);
 
-    res.render("addArticle", {
-      layout: "dashboard",
-      title: "Add Article",
-      user,
-      tags,
-      token,
-    });
-  }
-);
-
-route.get(
-  "/dashboard/:user",
-  middlewares.routeProtection,
-  async (req, res, next) => {
-    const { user } = res.locals;
-
-    const articles = await new ArticleService().getAuthorArticles(user._id);
-
-    res.render("authorPanel", {
-      layout: "dashboard",
-      title: "Dashboard",
-      articles,
-      user,
-    });
-  }
-);
-
-route.get(
-  "/update/:article",
-  middlewares.routeProtection,
-  async (req, res, next) => {
-    try {
-      const currentArticle = await new ArticleService().read(
-        req.params.article
-      );
-
-      res.render("updateArticle", {
-        layout: "dashboard",
-        title: `Update ${currentArticle.displayTitle}`,
-        article: currentArticle,
-        tags: await new TagService().getAll(),
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-route.get("/logout", (req, res, next) => {
-  res.clearCookie("token");
-  res.redirect("/");
-});
+route.get("/logout", app.logout);
 
 export default route;
