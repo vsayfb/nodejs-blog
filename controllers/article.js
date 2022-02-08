@@ -49,6 +49,8 @@ export default class ArticleController {
   update = async (req, res, next) => {
     const articleImage = req.files ? req.files.articleImage : undefined;
 
+    console.log(req.body);
+
     try {
       const article = await this.#service.update(req.params.id, {
         ...req.body,

@@ -30,9 +30,13 @@ function updateArticle(e) {
     if (this.readyState === 4) {
       if (this.status === 200) {
         window.location = `/article/${this.responseText.replace(/"/g, "")}`;
-      }
-      console.log(this.response);
+      } else alert(this.responseText);
     }
   };
-  xhttp.send(new FormData(e.target));
+
+  const data = new FormData(e.target);
+
+  data.append("content", editor.getData());
+
+  xhttp.send(data);
 }

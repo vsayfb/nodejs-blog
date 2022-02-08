@@ -14,8 +14,7 @@
 
   <div class="mb-3">
     <label for="description" class="form-label">Description</label>
-    <textarea class="form-control" name="description">
-    </textarea>
+    <textarea class="form-control" name="description"></textarea>
   </div>
 
   {{#each tags}}
@@ -25,10 +24,17 @@
 
   <div class="mb-3">
     <label for="content" class="form-label">Content</label>
-    <textarea class="form-control" name="content">
-    </textarea>
+    <textarea name="content" id="editor"></textarea>
   </div>
+
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <script src="/js/addArticle.js"></script>
+
+<script src="/ckeditor5/build/ckeditor.js"></script>
+
+<script>
+  ClassicEditor.create(document.querySelector("#editor"), { }).catch((error) =>
+  { console.error(error); });
+</script>

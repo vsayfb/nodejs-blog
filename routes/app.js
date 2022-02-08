@@ -8,7 +8,7 @@ const app = new AppController();
 
 route.get("/", middlewares.checkToken, app.home);
 
-route.get("/login", middlewares.verifyAuth, app.home);
+route.get("/login", middlewares.verifyAuth, app.login);
 
 route.get("/signUp", middlewares.verifyAuth, app.signUp);
 

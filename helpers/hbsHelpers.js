@@ -5,9 +5,9 @@ export default {
   checkedIf: (tags, articleTags) => {
     let tagsHTML = "";
 
-    function checkInput(tag) {
+    function checkInput(articleTag) {
       tags.forEach((t) => {
-        if (t._id.toString() === tag._id.toString()) {
+        if (t._id.toString() === articleTag._id.toString()) {
           t.checked = true;
         }
       });

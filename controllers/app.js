@@ -25,15 +25,15 @@ export default class AppController {
     }
   };
   signUp = (req, res, next) => {
-    res.render("signUp", { title: "Sign Up" });
+    res.status(200).render("signUp", { title: "Sign Up" });
   };
   login = (req, res, next) => {
-    res.render("login", { title: "Log In" });
+    res.status(200).render("login", { title: "Log In" });
   };
 
   addTag = (req, res, next) => {
     const { token, user } = res.locals;
-    res.render("addTag", { title: "Add Tag", token, user });
+    res.status(200).render("addTag", { title: "Add Tag", token, user });
   };
 
   addArticle = async (req, res, next) => {
@@ -41,7 +41,7 @@ export default class AppController {
 
     const tags = await this.#tag.getAll();
 
-    res.render("addArticle", {
+    res.status(200).render("addArticle", {
       layout: "dashboard",
       title: "Add Article",
       user,
@@ -54,7 +54,7 @@ export default class AppController {
 
     const articles = await this.#article.getAuthorArticles(user._id);
 
-    res.render("authorPanel", {
+    res.status(200).render("authorPanel", {
       layout: "dashboard",
       title: "Dashboard",
       articles,
@@ -67,7 +67,7 @@ export default class AppController {
 
       const tags = await this.#tag.getAll();
 
-      res.render("updateArticle", {
+      res.status(200).render("updateArticle", {
         layout: "dashboard",
         title: `Update ${currentArticle.displayTitle}`,
         article: currentArticle,
