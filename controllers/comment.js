@@ -6,5 +6,17 @@ export default class CommentController {
   constructor() {
     this.#service = new CommentService();
   }
-  create = () => {};
+  create = async (req, res, next) => {
+    try {
+      const comment = await this.#service.save(req.body);
+
+      const populated = await this.#service.populateDoc(comment, "author", {
+        displayName: 1,
+      });
+
+      return res.status(201).send(populated);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
