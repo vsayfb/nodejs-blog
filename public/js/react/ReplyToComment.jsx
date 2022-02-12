@@ -15,6 +15,8 @@ function ReplyToComment({ target, origin, comment, replies, setReplies }) {
       const reply = await result.json();
 
       setReplies([reply, ...replies]);
+
+      setText("");
     }
   };
 
@@ -23,6 +25,7 @@ function ReplyToComment({ target, origin, comment, replies, setReplies }) {
       <label htmlFor="form-label">Send to reply</label>
       <form onSubmit={sendReply}>
         <textarea
+          value={text}
           onChange={(e) => setText(e.target.value)}
           className="form-control"
         ></textarea>

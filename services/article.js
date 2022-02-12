@@ -72,7 +72,7 @@ export default class ArticleService {
   async getAll() {
     return Article.find({})
       .lean()
-      .populate("author", { displayName: 1, _id: 0 })
+      .populate([{ path: "author", select: { password: 0 } }, { path: "tags" }])
       .sort({ createdAt: -1 });
   }
 }

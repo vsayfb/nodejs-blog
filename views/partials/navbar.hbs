@@ -1,51 +1,69 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-        {{#if (isNotDefined token)}}
-          <li class="nav-item">
-            <a class="nav-link" href="/signUp">Sign Up</a>
-          </li>
+<div class="container">
+  <nav class="navbar">
+    <div class="hamburger">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="26"
+        height="26"
+        fill="#000000"
+        class="bi bi-list"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+        ></path>
+      </svg>
+    </div>
+    <a href="/" class="home">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="23"
+        height="22"
+        fill="#000000"
+        class="bi bi-house-fill"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
+        ></path>
+      </svg>
+    </a>
 
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Log In</a>
-          </li>
+    <div class="events">
+      <div class="search">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          fill="#000000"
+          class="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+          ></path>
+        </svg>
+      </div>
 
-        {{/if}}
+      {{#if (isNotDefined token)}}
+        <a class="yellow-button events-sign-in" href="/signUp">Create Account</a>
+        <a class="yellow-button events-log-in" href="/login">Log in</a>
+      {{/if}}
 
-        {{#if (isDefined token)}}
-
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboard/{{user._id}}">Dashboard</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-
-        {{/if}}
-
-      </ul>
       {{#if (isDefined token)}}
-        <div>
-          {{user.displayName}}
-        </div>
+        <a
+          class="yellow-button"
+          href="/dashboard/{{user._id}}"
+        >{{user.displayName}}</a>
+
+        <a class="black-button events-logout" href="/logout">Logout</a>
       {{/if}}
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

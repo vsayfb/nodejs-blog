@@ -12,11 +12,6 @@
     <input type="file" name="articleImage" class="form-control" />
   </div>
 
-  <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <textarea class="form-control" name="description"></textarea>
-  </div>
-
   {{#each tags}}
     <input type="checkbox" name="tags" value="{{_id}}" />
     <span onclick="chooseTag(event)"> {{text}}</span>

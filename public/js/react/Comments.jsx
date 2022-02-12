@@ -25,10 +25,15 @@ function Comments() {
       {!comments.length ? (
         <h3>There is no comment yet.</h3>
       ) : (
-        <div>
+        <React.Fragment>
           {comments.map((c) => (
-            <div className="mt-2 border p-3" key={c._id}>
-              <CommentCard origin={c.origin} text={c.text} commentId={c._id} />
+            <div key={c._id} className="comment-relative">
+              <CommentCard
+                origin={c.origin}
+                text={c.text}
+                commentId={c._id}
+                createdAt={c.createdAt}
+              />
               {currentUserId === c.origin._id ? (
                 <RemoveCommentFromArticle
                   comment={c._id}
@@ -38,7 +43,7 @@ function Comments() {
               ) : null}
             </div>
           ))}
-        </div>
+        </React.Fragment>
       )}
       <AddCommentToArticle setComments={setComments} comments={comments} />
     </div>

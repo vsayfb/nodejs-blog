@@ -1,0 +1,27 @@
+.comment {
+  padding: 10px;
+  border: 1px solid rgb(194, 183, 183);
+}
+.comment-user h5,
+h6 {
+  margin: 0;
+}
+.comment-text p {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-top: 1px rgb(226, 141, 13) solid;
+  border-bottom: 1px rgb(226, 141, 13) solid;
+}
+.comment-date {
+  margin-bottom: 3px;
+}
+.comment-relative {
+  position: relative;
+}
+.comment-relative .remove-comment {
+  position: absolute;
+  right: 10;
+  top: 10;
+}

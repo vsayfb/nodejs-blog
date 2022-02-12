@@ -13,8 +13,8 @@ export default class ReplyService {
 
   populateDoc = async (doc) => {
     return Reply.populate(doc, [
-      { path: "origin", select: { displayName: 1 } },
-      { path: "target", select: { displayName: 1 } },
+      { path: "origin", select: { displayName: 1, name: 1 } },
+      { path: "target", select: { displayName: 1, name: 1 } },
     ]);
   };
 

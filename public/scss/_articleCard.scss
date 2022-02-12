@@ -1,0 +1,51 @@
+$article-margin: 8px;
+$-article-padding: 8px;
+
+.article-card-link {
+  text-decoration: none;
+}
+
+.article-card {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  &-body {
+    h3,
+    &-author,
+    &-tags,
+    &-date {
+      margin-top: $article-margin;
+      padding-top: $-article-padding;
+      padding-bottom: $-article-padding;
+    }
+    &-author {
+      display: flex;
+      align-items: center;
+      color: black;
+      svg {
+        margin-right: 8px;
+      }
+      div {
+        font-weight: bold;
+      }
+    }
+    h3 {
+      color: black;
+      font-size: 23px;
+      transition: all 0.5s;
+      &:hover {
+        color: rgb(192, 85, 46);
+      }
+    }
+    &-date {
+      display: flex;
+      color: black;
+      span {
+        margin-left: 6px;
+      }
+    }
+  }
+  img {
+    width: 100%;
+    border-radius: 7px;
+  }
+}

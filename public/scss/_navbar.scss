@@ -1,0 +1,29 @@
+.navbar {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  .hamburger {
+    cursor: pointer;
+  }
+  .home {
+    text-decoration: none;
+    margin-left: 10px;
+  }
+
+  .events {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    .search {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    &-sign-in {
+      margin-right: 12px;
+    }
+    &-logout {
+      margin-left: 10px;
+    }
+  }
+}

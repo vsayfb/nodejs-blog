@@ -1,0 +1,12 @@
+.tag-box {
+  padding: 6px;
+  color: black;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: rgba(243, 243, 243, 1);
+  border: 1px solid rgba(231, 231, 231, 1);
+  transition: all 1.1s;
+  &:hover {
+    border: 1px solid rgb(192, 85, 46);
+  }
+}

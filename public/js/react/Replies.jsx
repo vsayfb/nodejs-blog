@@ -18,6 +18,22 @@ function Replies({ setRepliesVisibility, origin, text, commentId }) {
   };
 
   React.useEffect(() => {
+    document
+      .querySelectorAll(".remove-comment")
+      .forEach((icon) => (icon.style.display = "none"));
+
+    document
+      .querySelectorAll(".remove-comment")
+      .forEach((icon) => (icon.style.display = "none"));
+
+    return () => {
+      document
+        .querySelectorAll(".remove-comment")
+        .forEach((icon) => (icon.style.display = "block"));
+    };
+  }, []);
+
+  React.useEffect(() => {
     fetchReplies(mainComment.commentId);
   }, [mainComment]);
 
@@ -25,21 +41,19 @@ function Replies({ setRepliesVisibility, origin, text, commentId }) {
     <div>
       <RepliesComment
         setRepliesVisibility={setRepliesVisibility}
-        origin={mainComment.origin}
-        text={mainComment.text}
-        commentId={mainComment.commentId}
+        mainComment={mainComment}
         setMainComment={setMainComment}
         replies={commentReplies}
         setReplies={setCommentsReplies}
       >
         {commentReplies.length ? (
           commentReplies.map((r) => (
-            <div>
+            <div key={r._id} className="comment-relative">
               {r.origin ? (
                 <ReplyCard
-                  key={r._id}
                   setMainComment={setMainComment}
                   origin={r.origin}
+                  createdAt={r.createdAt}
                   text={r.text}
                   commentId={r._id}
                 />

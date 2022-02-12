@@ -26,6 +26,7 @@ export default class CommentService {
       "origin",
       {
         displayName: 1,
+        name: 1,
       }
     );
   };
