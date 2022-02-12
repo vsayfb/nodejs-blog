@@ -1,18 +1,20 @@
 <div class="container">
-  <div>{{article.author.displayName}}</div>
+  <article>
+    <div>{{article.author.displayName}}</div>
 
-  <div class="ck-content">
-    {{{article.content}}}
-  </div>
+    <div class="ck-content">
+      {{{article.content}}}
+    </div>
 
-  <h3>Comments</h3>
+    <h3>Comments</h3>
 
-  <input type="hidden" id="userId" value="{{user._id}}" />
+    <input type="hidden" id="userId" value="{{user._id}}" />
 
-  <input type="hidden" id="articleId" value="{{article._id}}" />
+    <input type="hidden" id="articleId" value="{{article._id}}" />
 
-  <div id="comments"></div>
+    <div id="comments"></div>
 
+  </article>
 </div>
 
 <script
@@ -23,4 +25,18 @@
   src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
   crossorigin
 ></script>
-<script src="/js/commentArea.js"></script>
+
+<script
+  src="https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js"
+></script>
+
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel" src="/js/react/Replies.jsx"></script>
+<script type="text/babel" src="/js/react/ReplyCard.jsx"></script>
+<script type="text/babel" src="/js/react/ReplyToComment.jsx"></script>
+<script type="text/babel" src="/js/react/RepliesComment.jsx"></script>
+<script type="text/babel" src="/js/react/RemoveCommentFromArticle.jsx"></script>
+<script type="text/babel" src="/js/react/CommentCard.jsx"></script>
+<script type="text/babel" src="/js/react/AddCommentToArticle.jsx"></script>
+<script type="text/babel" src="/js/react/Comments.jsx"></script>

@@ -10,7 +10,7 @@ export default class CommentController {
     try {
       const comment = await this.#service.save(req.body);
 
-      const populated = await this.#service.populateDoc(comment, "author", {
+      const populated = await this.#service.populateDoc(comment, "origin", {
         displayName: 1,
       });
 
