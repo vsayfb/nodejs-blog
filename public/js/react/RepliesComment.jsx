@@ -11,8 +11,10 @@ function RepliesComment({
   const requests = JSON.parse(localStorage.getItem("requests"));
 
   const escape = (e) => {
-    e.key === "Escape" ? setRepliesVisibility(false) : null;
-    localStorage.removeItem("requests");
+    if (e.key === "Escape") {
+      setRepliesVisibility(false);
+      localStorage.removeItem("requests");
+    }
   };
 
   React.useEffect(() => {

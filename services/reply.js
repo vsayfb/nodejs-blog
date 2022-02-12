@@ -1,4 +1,3 @@
-import CommentService from "./comment.js";
 import Reply from "../models/reply.js";
 
 export default class ReplyService {
@@ -6,6 +5,10 @@ export default class ReplyService {
 
   save(doc) {
     return new Reply(doc).save();
+  }
+
+  remove(_id) {
+    return Reply.findByIdAndDelete(_id);
   }
 
   populateDoc = async (doc) => {

@@ -8,5 +8,6 @@ const reply = new ReplyController();
 
 route.get("/repliesComment", reply.getRepliesComment);
 route.post("/", middlewares.isAuth, reply.create);
+route.delete("/", middlewares.isAuth, reply.remove);
 
 export default route;

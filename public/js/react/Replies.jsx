@@ -33,17 +33,26 @@ function Replies({ setRepliesVisibility, origin, text, commentId }) {
         setReplies={setCommentsReplies}
       >
         {commentReplies.length ? (
-          commentReplies.map((r) =>
-            r.origin ? (
-              <ReplyCard
-                key={r._id}
-                setMainComment={setMainComment}
-                origin={r.origin}
-                text={r.text}
-                commentId={r._id}
-              />
-            ) : null
-          )
+          commentReplies.map((r) => (
+            <div>
+              {r.origin ? (
+                <ReplyCard
+                  key={r._id}
+                  setMainComment={setMainComment}
+                  origin={r.origin}
+                  text={r.text}
+                  commentId={r._id}
+                />
+              ) : null}
+              {r.origin._id === currentUserId && (
+                <RemoveReplyFromComment
+                  replies={commentReplies}
+                  setReplies={setCommentsReplies}
+                  replyId={r._id}
+                />
+              )}
+            </div>
+          ))
         ) : (
           <h1>No reply.</h1>
         )}

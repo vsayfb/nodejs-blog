@@ -34,4 +34,13 @@ export default class Reply {
       next(error);
     }
   };
+  remove = async (req, res, next) => {
+    try {
+      await this.#service.remove(req.headers.reply);
+
+      res.status(200).send("Removed");
+    } catch (error) {
+      next(error);
+    }
+  };
 }
