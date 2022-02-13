@@ -69,6 +69,10 @@ export default class ArticleService {
     return Article.find({ author }).lean();
   }
 
+  async getCount(where) {
+    return Article.find(where).count();
+  }
+
   async getAll() {
     return Article.find({})
       .lean()

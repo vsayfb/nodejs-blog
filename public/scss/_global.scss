@@ -4,6 +4,22 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("../Montserrat-Regular.ttf");
+  src: url("../Montserrat-Regular.ttf") format("embedded-opentype"),
+    url("../Montserrat-Regular.ttf") format("ttf"),
+    url("../Montserrat-Regular.ttf") format("truetype");
+}
+
+html {
+  font-family: "Montserrat";
+}
+
+.card {
+}
+
+
 .container {
   padding-right: 15px;
   padding-left: 15px;

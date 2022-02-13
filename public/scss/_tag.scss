@@ -1,0 +1,57 @@
+.tag-box {
+  padding: 6px;
+  color: black;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: rgba(243, 243, 243, 1);
+  border: 1px solid rgba(231, 231, 231, 1);
+  transition: all 1.1s;
+  &:hover {
+    border: 1px solid rgb(192, 85, 46);
+  }
+}
+
+.tag-card {
+  position: relative;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 10px;
+  border: 1px solid rgb(221, 210, 210);
+  padding: 10px;
+  @include medium() {
+    width: 47%;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  @include extra-large() {
+    width: 31%;
+  }
+
+  .hex {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 6px;
+    width: 100%;
+  }
+  .text {
+    margin-top: 15px;
+    a {
+      text-decoration: none;
+      color: black;
+      font-size: 1.2rem;
+    }
+  }
+  span {
+    display: block;
+    margin-top: 15px;
+  }
+}
+
+.tags {
+  display: block;
+  @include medium() {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

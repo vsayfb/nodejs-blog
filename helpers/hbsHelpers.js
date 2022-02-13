@@ -2,6 +2,8 @@ export default {
   toDate: (date) => new Date(date).toDateString(),
   isDefined: (value) => value != undefined,
   isNotDefined: (value) => value == undefined,
+  generateHexCode: () =>
+    "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
   checkedIf: (tags, articleTags) => {
     let tagsHTML = "";
 

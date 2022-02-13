@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="tags">
+    {{#each tags}}
+      <div class="tag-card">
+        <div class="hex" style="background-color: {{generateHexCode}};">
+        </div>
+        <div class="text">
+          <a href="/tag/{{_id}}">
+            #{{text}}
+          </a>
+        </div>
+        <span>
+          {{puplishedArticlesLength}}
+          articles published
+        </span>
+      </div>
+    {{/each}}
+  </div>
+
+</div>

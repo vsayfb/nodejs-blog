@@ -27,13 +27,15 @@ function AddCommentToArticle({ setComments, comments }) {
   };
 
   return (
-    <form className="mt-3" onSubmit={addComment}>
-      <textarea
-        onChange={(e) => setText(e.target.value)}
-        value={text}
-        className="form-control"
-      ></textarea>
-      <button type="submit" className="btn btn-warning mt-3">
+    <form className="comment-form" onSubmit={addComment}>
+      <div>
+        <textarea
+          onChange={(e) => setText(e.target.value)}
+          value={text}
+          rows={3}
+        ></textarea>
+      </div>
+      <button type="submit" className="yellow-button">
         Send
       </button>
     </form>

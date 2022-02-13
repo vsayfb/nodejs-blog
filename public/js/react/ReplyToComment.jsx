@@ -21,17 +21,13 @@ function ReplyToComment({ target, origin, comment, replies, setReplies }) {
   };
 
   return (
-    <div>
-      <label htmlFor="form-label">Send to reply</label>
-      <form onSubmit={sendReply}>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="form-control"
-        ></textarea>
+    <form className="comment-form" onSubmit={sendReply}>
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      ></textarea>
 
-        <button className="btn btn-success mt-3">Send</button>
-      </form>
-    </div>
+      <button className="yellow-button">Send</button>
+    </form>
   );
 }

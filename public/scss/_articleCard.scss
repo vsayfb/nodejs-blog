@@ -6,8 +6,14 @@ $-article-padding: 8px;
 }
 
 .article-card {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid black;
+  padding-bottom: $-article-padding;
+  @include medium() {
+    width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   &-body {
     h3,
     &-author,

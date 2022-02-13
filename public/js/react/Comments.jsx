@@ -21,11 +21,18 @@ function Comments() {
   }, []);
 
   return (
-    <div>
+    <div className="comment-area">
+      <h3 className="comment-area-title">Comments</h3>
+
       {!comments.length ? (
-        <h3>There is no comment yet.</h3>
+        <React.Fragment>
+          <h3 className="none">There is no comment yet.</h3>
+          <AddCommentToArticle setComments={setComments} comments={comments} />
+        </React.Fragment>
       ) : (
         <React.Fragment>
+          <AddCommentToArticle setComments={setComments} comments={comments} />
+
           {comments.map((c) => (
             <div key={c._id} className="comment-relative">
               <CommentCard
@@ -45,7 +52,6 @@ function Comments() {
           ))}
         </React.Fragment>
       )}
-      <AddCommentToArticle setComments={setComments} comments={comments} />
     </div>
   );
 }

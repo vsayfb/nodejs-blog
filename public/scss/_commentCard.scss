@@ -1,6 +1,7 @@
 .comment {
   padding: 10px;
   border: 1px solid rgb(194, 183, 183);
+  margin-top: 17px;
 }
 .comment-user h5,
 h6 {
@@ -24,4 +25,30 @@ h6 {
   position: absolute;
   right: 10;
   top: 10;
+}
+.comment-area {
+  margin-top: 15px;
+  &-title {
+    margin-bottom: 15px;
+  }
+  .none {
+    margin-bottom: 15px;
+  }
+}
+.comment-form {
+  textarea {
+    width: 100%;
+    outline: none;
+    border: 1px solid rgb(218, 206, 206);
+    border-radius: 4px;
+    @include medium() {
+    }
+  }
+  button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 7px;
+    border-radius: 4px;
+  }
 }

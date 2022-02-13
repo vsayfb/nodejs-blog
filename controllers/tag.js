@@ -5,6 +5,16 @@ export default class TagController {
   #service = new TagService();
   #event = new TagEvent();
 
+  readAll = async (req, res, next) => {
+    try {
+      const tags = await this.#service.readAll();
+
+      res.status(200).render("tags", { title: "Tags", tags });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   read = async (req, res, next) => {
     try {
       const tag = await this.#service.read(req.params.id);
