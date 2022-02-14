@@ -24,3 +24,31 @@
     }
   }
 }
+
+.article-form {
+  width: 100%;
+  &-input {
+    margin-top: 15px;
+    label {
+      display: block;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid gainsboro;
+    }
+  }
+  .tag {
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+  button {
+    margin-top: 15px;
+    outline: none;
+    width: 100%;
+    border: 0px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

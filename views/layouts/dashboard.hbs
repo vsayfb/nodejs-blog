@@ -5,40 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/app.css" />
-
     <title>{{title}}</title>
 </head>
 <body>
-
    {{> navbar}}     
-
   <div class="container">
-    <div>
-    <h3>{{user.displayName}}</h3>
-
-    <div class="d-flex">
+    <div style="margin-top: 10px; margin-bottom: 10px;">
       <span>Last login : </span>
        {{#if user.lastLogin}}
          <b class="ms-2">{{toDate user.lastLogin}}</b>
        {{else}}
          <b class="ms-2">{{toDate user.createdAt}}</b>
        {{/if}}
-        
-     
     </div>
-  </div>
-
-  <div class="row mt-3">
     {{> panel}}
-    <div class="col">
-       {{{body}}}
-    </div>
+    {{{body}}}
   </div>
-  </div>
-
   <script src="/js/index.js"></script>
   <script src="/js/dashboard.js"></script>
-
-
 </body>
 </html>

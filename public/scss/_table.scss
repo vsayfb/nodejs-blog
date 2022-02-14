@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+  thead {
+    background: #ffed86;
+
+    th {
+      padding: 10px;
+    }
+  }
+  td {
+    text-align: center;
+    padding: 10px;
+
+    a {
+      text-decoration: none;
+      transition: color 0.5s;
+      color: black;
+      &:hover {
+        color: #e94b0d;
+      }
+    }
+  }
+}

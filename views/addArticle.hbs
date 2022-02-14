@@ -1,32 +1,33 @@
-<form onsubmit="addArticle(event)" id="addArticle">
+<form onsubmit="addArticle(event)" class="article-form" id="addArticle">
 
   <input type="hidden" name="author" value="{{user._id}}" />
 
-  <div class="mb-3">
+  <div class="a-form-input">
     <label for="displayTitle" class="form-label">Article Display Title</label>
     <input type="text" class="form-control" name="displayTitle" />
   </div>
 
-  <div class="mb-3">
+  <div class="a-form-input">
     <label for="articleImage" class="form-label">Article Image</label>
-    <input type="file" name="articleImage" class="form-control" />
+    <input type="file" name="articleImage" />
   </div>
 
-  {{#each tags}}
-    <input type="checkbox" name="tags" value="{{_id}}" />
-    <span onclick="chooseTag(event)"> {{text}}</span>
-  {{/each}}
+  <div class="tag">
+    {{#each tags}}
+      <input type="checkbox" name="tags" value="{{_id}}" />
+      <span onclick="chooseTag(event)"> {{text}}</span>
+    {{/each}}
+  </div>
 
   <div class="mb-3">
     <label for="content" class="form-label">Content</label>
     <textarea name="content" id="editor"></textarea>
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="yellow-button">Submit</button>
 </form>
 
 <script src="/js/addArticle.js"></script>
-
 <script src="/ckeditor5/build/ckeditor.js"></script>
 
 <script>

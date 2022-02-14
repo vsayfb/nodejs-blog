@@ -1,9 +1,9 @@
-<form onsubmit="updateArticle(event) " id="updateArticle">
+<form onsubmit="updateArticle(event) " class="article-form" id="updateArticle">
 
   <input type="hidden" id="articleId" value="{{article._id}}" />
   <input type="hidden" name="author" value="{{user._id}}" />
 
-  <div class="mb-3">
+  <div class="a-form-input">
     <label for="displayTitle" class="form-label">Article Display Title</label>
     <input
       type="text"
@@ -13,7 +13,7 @@
     />
   </div>
 
-  <div class="mb-3">
+  <div class="a-form-input">
     <label for="articleImage" class="form-label">Article Image</label>
     {{#if article.images.title}}
       <div>
@@ -24,13 +24,15 @@
     <input type="file" name="articleImage" class="form-control" />
   </div>
 
+  <br />
   {{{checkedIf tags article.tags}}}
+  <br />
 
-  <div class="mb-3">
+  <div class="a-form-input">
     <label for="content" class="form-label">Content</label>
     <div id="editor">{{{article.content}}}</div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="yellow-button">Submit</button>
 </form>
 
 <script src="/ckeditor5/build/ckeditor.js"></script>
