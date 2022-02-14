@@ -7,7 +7,7 @@ function write(type, folderName, message) {
 
   if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
 
-  fs.appendFile(
+  return fs.appendFile(
     path.join(path.resolve() + `/logs/${folderName}/${type}.log`),
     JSON.stringify(message) + "\n",
     (err) => {
@@ -25,7 +25,7 @@ const logger = {
     logger.console(message);
   },
   html: (event, status, message) => {
-    fs.appendFileSync(
+    return fs.appendFileSync(
       path.join(path.resolve() + "/logs/html.log"),
       `<div class="log"><span class="log-event">${event}</span> : <span class="${
         status < 300 ? "success-stat" : status > 400 ? "error-stat" : ""

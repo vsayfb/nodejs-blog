@@ -14,14 +14,14 @@
   </div>
 
   <div class="a-form-input">
-    <label for="articleImage" class="form-label">Article Image</label>
-    {{#if article.images.title}}
+    <label for="image" class="form-label">Article Image</label>
+    {{#if article.title}}
       <div>
         <span>Current : </span>
-        <div> <a href="/{{article.images.article}}"></a> </div>
+        <div> <a href="/{{article.image}}"></a> </div>
       </div>
     {{/if}}
-    <input type="file" name="articleImage" class="form-control" />
+    <input type="file" name="image" class="form-control" />
   </div>
 
   <br />

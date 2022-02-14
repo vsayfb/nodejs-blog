@@ -21,14 +21,14 @@ export default class ArticleService {
   }
 
   async save(doc) {
-    const articleImage = await this.#image.upload(doc.articleImage);
+    const image = await this.#image.upload(doc.image);
 
     // it is a file field dont save to db
     delete doc.articleImage;
 
     const article = await new Article({
       ...doc,
-      images: { article: articleImage },
+      image,
     }).save();
 
     return article;
@@ -37,7 +37,7 @@ export default class ArticleService {
   async remove(data) {
     const article = await Article.findById(data._id);
 
-    await this.#image.remove(article.images.article);
+    await this.#image.remove(article.image);
 
     await article.delete();
 
@@ -47,10 +47,7 @@ export default class ArticleService {
   async update(_id, data) {
     const article = await Article.findById(_id);
 
-    const image = await this.#image.update(
-      article.images.article,
-      data.articleImage
-    );
+    const image = await this.#image.update(article.image, data.image);
 
     // update changed fields
     for (const prop in data) {
@@ -60,7 +57,7 @@ export default class ArticleService {
     const tags = manipulateTagsField(data.tags);
 
     article.tags = tags;
-    article.images.article = image;
+    article.image = image;
 
     return await article.save();
   }
@@ -85,5 +82,12 @@ export default class ArticleService {
       .lean()
       .populate([{ path: "author", select: { password: 0 } }, { path: "tags" }])
       .sort({ createdAt: -1 });
+  }
+
+  increaseViews(_id, userHistory) {
+    if (!userHistory || JSON.parse(userHistory.indexOf(_id) < 0)) {
+      return Article.findOneAndUpdate({ _id }, { $inc: { views: 1 } });
+    }
+    return;
   }
 }

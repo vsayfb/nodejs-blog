@@ -6,6 +6,7 @@ export default class ImageService {
   #address = path.join(path.resolve() + "/uploads/");
   upload(image) {
     return new Promise((resolve, reject) => {
+      // save db empty string
       if (!image) resolve("");
 
       image.mv(`${this.#address + image.name}`, (err) => {

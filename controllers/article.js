@@ -30,6 +30,8 @@ export default class ArticleController {
         title: article.displayTitle,
         user: res.locals.user,
       });
+
+      await this.#service.increaseViews(article._id, req.cookies.userHistory);
     } catch (error) {
       next(error);
     }
@@ -49,12 +51,12 @@ export default class ArticleController {
     }
   };
   update = async (req, res, next) => {
-    const articleImage = req.files ? req.files.articleImage : undefined;
+    const image = req.files ? req.files.image : undefined;
 
     try {
       const article = await this.#service.update(req.params.id, {
         ...req.body,
-        articleImage,
+        image,
       });
 
       res.status(200).send(article._id);

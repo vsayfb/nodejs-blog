@@ -42,6 +42,14 @@ $-article-padding: 8px;
         color: rgb(192, 85, 46);
       }
     }
+    &-views {
+      margin-top: $article-margin;
+      display: flex;
+      align-items: center;
+      svg {
+        margin-right: 5px;
+      }
+    }
     &-date {
       display: flex;
       color: black;
@@ -52,6 +60,7 @@ $-article-padding: 8px;
   }
   img {
     width: 100%;
+    height: 220px;
     border-radius: 7px;
   }
 }

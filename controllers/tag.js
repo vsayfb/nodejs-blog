@@ -19,8 +19,6 @@ export default class TagController {
     try {
       const { tag, articles } = await this.#service.read(req.params.id);
 
-      console.log(tag, articles);
-
       res.status(200).render("tag", { title: tag.text, tag, articles });
     } catch (error) {
       next(error);
