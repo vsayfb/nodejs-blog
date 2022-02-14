@@ -21,9 +21,11 @@ function ReplyToComment({ target, origin, comment, replies, setReplies }) {
   };
 
   return (
-    <form className="comment-form" onSubmit={sendReply}>
+    <form className="comment-form-2" onSubmit={sendReply}>
       <textarea
         value={text}
+        rows={2}
+        placeholder={"Send your reply."}
         onChange={(e) => setText(e.target.value)}
       ></textarea>
 

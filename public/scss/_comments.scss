@@ -1,0 +1,98 @@
+.comment {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid black;
+}
+.comment-user h5,
+h6 {
+  margin: 0;
+}
+.comment-text p {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
+}
+.comment-date {
+  margin-bottom: 3px;
+}
+.comment-relative {
+  position: relative;
+}
+.comment-relative .remove-comment {
+  position: absolute;
+  right: 10;
+  top: 10;
+}
+.comment-area {
+  margin-top: 15px;
+  &-title {
+    margin-bottom: 15px;
+  }
+  .none {
+    margin-bottom: 15px;
+  }
+}
+.comment-form {
+  textarea {
+    width: 100%;
+    outline: none;
+    border: 1px solid rgb(218, 206, 206);
+    border-radius: 4px;
+  }
+  button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 7px;
+    border-radius: 4px;
+  }
+}
+.comment-form-2 {
+  position: relative;
+  textarea {
+    padding: 18px;
+    width: 100%;
+    outline: none;
+    border: 1px solid rgb(218, 206, 206);
+    border-radius: 4px;
+    &::-webkit-input-placeholder {
+      color: rgb(16, 121, 190);
+    }
+    &:-moz-placeholder {
+      color: rgb(16, 121, 190);
+
+      opacity: 1;
+    }
+    &::-moz-placeholder {
+      color: rgb(16, 121, 190);
+
+      opacity: 1;
+    }
+    &:-ms-input-placeholder {
+      color: rgb(16, 121, 190);
+    }
+    &::-ms-input-placeholder {
+      color: rgb(16, 121, 190);
+    }
+
+    ::placeholder {
+      color: rgb(16, 121, 190);
+    }
+  }
+  button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    outline: none;
+    background-color: rgb(16, 121, 190) !important;
+    border: none;
+    cursor: pointer;
+    margin-top: 7px;
+    color: white;
+  }
+}

@@ -55,3 +55,16 @@
     flex-wrap: wrap;
   }
 }
+
+.tag-title {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  h4 {
+    border-bottom: 1px solid orange;
+    border-top: 1px solid orange;
+    text-align: center;
+    padding: 5px;
+    text-transform: uppercase;
+  }
+}

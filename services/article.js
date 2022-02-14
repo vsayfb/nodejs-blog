@@ -73,6 +73,13 @@ export default class ArticleService {
     return Article.find(where).count();
   }
 
+  async get(where) {
+    return Article.find(where)
+      .select("images displayTitle author")
+      .populate("author", { password: 0 })
+      .lean();
+  }
+
   async getAll() {
     return Article.find({})
       .lean()

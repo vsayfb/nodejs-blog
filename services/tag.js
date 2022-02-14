@@ -6,11 +6,13 @@ export default class TagService {
   #article = new ArticleService();
 
   async read(_id) {
-    const article = await Tag.findById(_id);
+    const tag = await Tag.findById(_id).lean();
 
-    if (!article) throw new ErrorHandler("Tag Not Found!", 400);
+    if (!tag) throw new ErrorHandler("Tag Not Found!", 400);
 
-    return article;
+    const articles = await this.#article.get({ tags: { $in: tag } });
+
+    return { tag, articles };
   }
 
   async readAll() {

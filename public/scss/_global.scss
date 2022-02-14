@@ -16,9 +16,10 @@ html {
   font-family: "Montserrat";
 }
 
-.card {
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
-
 
 .container {
   padding-right: 15px;
