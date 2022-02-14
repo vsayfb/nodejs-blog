@@ -1,0 +1,26 @@
+.a-form {
+  width: 100%;
+  @include medium() {
+    width: 50%;
+  }
+  &-input {
+    margin-top: 15px;
+    label {
+      display: block;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid gainsboro;
+    }
+  }
+  button {
+    margin-top: 15px;
+    outline: none;
+    width: 100%;
+    border: 0px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

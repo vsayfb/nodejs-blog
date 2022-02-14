@@ -16,7 +16,7 @@ export default class ArticleController {
 
       res.status(201).send(article._id);
 
-      this.#event.created(article);
+      this.#event.created(req.token, article);
     } catch (error) {
       next(error);
     }
@@ -42,7 +42,7 @@ export default class ArticleController {
 
       res.status(200).send(article._id);
 
-      this.#event.deleted(article);
+      this.#event.deleted(req.token, article);
     } catch (error) {
       console.log(error);
       next(error);

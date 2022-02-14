@@ -16,9 +16,35 @@ html {
   font-family: "Montserrat";
 }
 
+.success-stat {
+  color: rgb(19, 221, 19);
+}
+.error-stat {
+  color: rgb(236, 12, 12);
+}
+
+.log {
+  background-color: rgb(240, 235, 235);
+  padding: 5px;
+  &-event {
+    color: rgb(30, 97, 221);
+  }
+  &-inf {
+    a {
+      color: black;
+    }
+  }
+}
+
 .wrapper {
   display: flex;
   flex-wrap: wrap;
+}
+.center {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {

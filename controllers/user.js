@@ -24,7 +24,7 @@ export default class UserController {
 
       res.status(201).send("User Created!");
 
-      this.#event.signUp(user);
+      this.#event.newAuthor(user);
     } catch (error) {
       next(error);
     }

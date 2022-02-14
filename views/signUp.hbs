@@ -1,23 +1,28 @@
-<div
-  class="container d-flex justify-content-center align-items-center"
-  style="height: 80vh;"
->
-  <form class="w-50" onsubmit="signUp(event)" id="signUp">
-    <h1 class="text-center mb-3">Sign Up</h1>
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" name="name" />
-    </div>
-    <div class="mb-3">
-      <label for="displayName" class="form-label">Display name</label>
-      <input type="text" class="form-control" name="displayName" />
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" name="password" />
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+<div class="container">
+  <div class="center">
+    <form class="a-form" onsubmit="signUp(event)" id="signUp">
+      <h1>Sign Up</h1>
+      <div class="a-form-input">
+        <div>
+          <label for="name" class="form-label">Name</label>
+        </div>
+        <input type="text" class="form-control" name="name" />
+      </div>
+      <div class="a-form-input">
+        <div>
+          <label for="displayName" class="form-label">Display name</label>
+        </div>
+        <input type="text" class="form-control" name="displayName" />
+      </div>
+      <div class="a-form-input">
+        <div>
+          <label for="password" class="form-label">Password</label>
+        </div>
+        <input type="password" class="form-control" name="password" />
+      </div>
+      <button type="submit" class="yellow-button">Submit</button>
+    </form>
+  </div>
 </div>
 
 <script src="/js/signUp.js"></script>

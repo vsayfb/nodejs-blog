@@ -1,9 +1,10 @@
 import logger from "../utils/logger.js";
 
 export default class CommonEvent {
+  logger = logger;
+
   constructor(model) {
     this.model = model;
-    this.logger = logger;
     this.model = model;
   }
 

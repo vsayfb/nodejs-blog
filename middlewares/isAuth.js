@@ -13,7 +13,9 @@ export default async (req, res, next) => {
       throw new ErrorHandler("Invalid token!", 401);
     }
 
-    await verifyToken(token);
+    const result = await verifyToken(token);
+
+    req.token = result;
 
     next();
   } catch (error) {

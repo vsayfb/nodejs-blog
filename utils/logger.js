@@ -9,10 +9,9 @@ function write(type, folderName, message) {
 
   fs.appendFile(
     path.join(path.resolve() + `/logs/${folderName}/${type}.log`),
-    type === "error" ? message + "\n" : JSON.stringify(message) + "\n",
+    JSON.stringify(message) + "\n",
     (err) => {
       if (err) {
-        fs.writeFileSync("error.log", err.message);
         throw new ErrorHandler(err.message, 500);
       }
     }
@@ -24,6 +23,14 @@ const logger = {
   error: (folderName, message) => {
     write("error", folderName, message);
     logger.console(message);
+  },
+  html: (event, status, message) => {
+    fs.appendFileSync(
+      path.join(path.resolve() + "/logs/html.log"),
+      `<div class="log"><span class="log-event">${event}</span> : <span class="${
+        status < 300 ? "success-stat" : status > 400 ? "error-stat" : ""
+      }">${status} : </span><span class="log-inf">${message}</span></div>`
+    );
   },
   console: (message) => {
     if (process.env.NODE_ENV !== "production") {

@@ -7,7 +7,8 @@ export default class UserEvent extends CommonEvent {
   login = (data) => {
     this.logger.info("user/auth", { type: "login", data });
   };
-  signUp = (data) => {
-    this.logger.info("user/auth", { type: "signUp", data });
+  newAuthor = (user) => {
+    this.logger.info("user/auth", { type: "new author", user });
+    this.logger.html("new author", 201, `${user.displayName} became a member.`);
   };
 }

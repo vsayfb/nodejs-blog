@@ -1,5 +1,7 @@
 import ArticleService from "../services/article.js";
 import TagService from "../services/tag.js";
+import fs from "fs";
+import path from "path";
 
 export default class AppController {
   #article;
@@ -23,6 +25,14 @@ export default class AppController {
     } catch (error) {
       next(error);
     }
+  };
+  getLogs = (req, res, next) => {
+    const result = fs.readFileSync(
+      path.join(path.resolve() + "/logs/html.log"),
+      "utf8"
+    );
+
+    res.status(200).render("logs", { result });
   };
   signUp = (req, res, next) => {
     res.status(200).render("signUp", { title: "Sign Up" });
