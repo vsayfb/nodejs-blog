@@ -13,6 +13,12 @@ router.post(
   user.register
 );
 
+router.put("/refreshPassword", middlewares.isAuth, user.refreshPsw);
+
+router.post("/checkCode", middlewares.isAuth, user.checkCodeForNewPassword);
+
+router.patch("/newPassword", middlewares.isAuth, user.newPassword);
+
 router.post("/login", user.login);
 
 export default router;

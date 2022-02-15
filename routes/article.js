@@ -7,7 +7,7 @@ const route = Router();
 
 const article = new ArticleController();
 
-route.get("/:id", middlewares.detectUser, article.read);
+route.get("/:id", middlewares.isAuth, article.read);
 
 route.post(
   "/new",

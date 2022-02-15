@@ -1,30 +1,26 @@
 import ArticleService from "../services/article.js";
 import TagService from "../services/tag.js";
+import TagController from "../controllers/tag.js";
+import ArticleController from "../controllers/article.js";
+import mongoose from "mongoose";
 import fs from "fs";
 import path from "path";
 
 export default class AppController {
   #article;
   #tag;
+  #tagController;
+  #articleController;
 
   constructor() {
     this.#article = new ArticleService();
     this.#tag = new TagService();
+    this.#tagController = new TagController();
+    this.#articleController = new ArticleController();
   }
 
   home = async (req, res, next) => {
-    try {
-      const articles = await this.#article.getAll();
-
-      res.status(200).render("home", {
-        articles,
-        title: "Blog App",
-        token: res.locals.token,
-        user: res.locals.user,
-      });
-    } catch (error) {
-      next(error);
-    }
+    this.#articleController.readAll(req, res, next);
   };
   getLogs = (req, res, next) => {
     const result = fs.readFileSync(
@@ -34,18 +30,25 @@ export default class AppController {
 
     res.status(200).render("logs", { result });
   };
+  tagsPage = async (req, res, next) => {
+    this.#tagController.readAll(req, res, next);
+  };
+  articlePage = async (req, res, next) => {
+    this.#articleController.read(req, res, next);
+  };
+  tagPage = async (req, res, next) => {
+    this.#tagController.read(req, res, next);
+  };
   signUp = (req, res, next) => {
     res.status(200).render("signUp", { title: "Sign Up" });
   };
   login = (req, res, next) => {
     res.status(200).render("login", { title: "Log In" });
   };
-
   addTag = (req, res, next) => {
     const { token, user } = res.locals;
     res.status(200).render("addTag", { title: "Add Tag", token, user });
   };
-
   addArticle = async (req, res, next) => {
     const { token, user } = res.locals;
 
@@ -87,6 +90,35 @@ export default class AppController {
       next(error);
     }
   };
+  refreshPasswordPage = (req, res, next) => {
+    res.status(200).render("refreshPsw", {
+      layout: "dashboard",
+      title: "Refresh Password",
+      user: res.locals.user,
+    });
+  };
+  checkCodePage = (req, res, next) => {
+    if (
+      !mongoose.isValidObjectId(req.query.code) ||
+      !mongoose.isValidObjectId(req.query.user)
+    ) {
+      return res.redirect("/login");
+    }
+
+    res.status(200).render("checkCodePage", { user: res.locals.user });
+  };
+
+  newPasswordPage = (req, res, next) => {
+    if (
+      !mongoose.isValidObjectId(req.query.code) ||
+      !mongoose.isValidObjectId(req.query.user)
+    ) {
+      return res.redirect("/login");
+    }
+
+    res.status(200).render("newPasswordPage", { user: res.locals.user });
+  };
+
   logout = (req, res, next) => {
     res.clearCookie("token");
     res.redirect("/");

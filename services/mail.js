@@ -19,6 +19,7 @@ export default class MailService {
     const accessToken = await new Promise((resolve, reject) => {
       oauth2Client.getAccessToken((err, token) => {
         if (err) {
+          console.log(err);
           reject(new ErrorHandler(err.message, 500));
         }
         resolve(token);
@@ -43,14 +44,13 @@ export default class MailService {
 
   sendCodeToMail = async (mail, code) => {
     try {
-      const go = await this.transporter();
+      const transporter = await this.transporter();
 
-      return go.sendMail({
-        from: `Node-Blog-App ${process.env.EMAIL}`, // sender address
-        to: mail, // list of receivers
-        subject: "Here is the your verification code.", // Subject line
-        html: `<h3> Hi there. Please enter the code in the relevant field.<h3/>
-        <div>${code}</div>`,
+      return transporter.sendMail({
+        from: `Node-Blog-App ${process.env.EMAIL}`,
+        to: mail,
+        subject: "Here is the your verification code.",
+        html: `<h3> Hi there. ${code}.<h3/>`,
       });
     } catch (error) {
       throw new ErrorHandler(error.message, 500);

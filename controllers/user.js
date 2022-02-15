@@ -2,7 +2,9 @@ import UserEvent from "../events/user.js";
 import AuthService from "../services/auth.js";
 import UserService from "../services/user.js";
 import MailService from "../services/mail.js";
+import RandomNumber from "../services/randomNum.js";
 import { generateToken } from "../utils/token.js";
+import { hashPassword } from "../utils/password.js";
 
 export default class UserController {
   #service;
@@ -44,6 +46,50 @@ export default class UserController {
       return res.status(200).send("Success.");
     } catch (error) {
       if (error.status === 400) this.#event.emit("not found", error.message);
+      next(error);
+    }
+  };
+
+  refreshPsw = async (req, res, next) => {
+    try {
+      const user = await this.#service.checkPassword(
+        req.token._id,
+        req.body.password
+      );
+
+      const { num: code, _id } = await RandomNumber.create();
+
+      await this.#mail.sendCodeToMail(user.email, code);
+
+      return res.status(301).send(`/checkCode?user=${user._id}&code=${_id}`);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  checkCodeForNewPassword = async (req, res, next) => {
+    try {
+      const { code, user } = req.headers;
+
+      await RandomNumber.verifySubmittedCode(code, req.body.code);
+
+      res.status(301).send(`/newPassword?user=${user}&code=${code}`);
+    } catch (error) {
+      next(error);
+    }
+  };
+  newPassword = async (req, res, next) => {
+    try {
+      const { code, user } = req.headers;
+
+      const hashed = await hashPassword(req.body.password);
+
+      await RandomNumber.removeSubmittedCode(code);
+
+      await this.#service.update(user, { password: hashed });
+
+      res.status(200).send("Your password has been changed.");
+    } catch (error) {
       next(error);
     }
   };

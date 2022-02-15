@@ -7,7 +7,6 @@ const route = Router();
 const tag = new TagController();
 
 route.get("/all", tag.readAll);
-route.get("/:id", tag.read);
 
 route.post(
   "/new",

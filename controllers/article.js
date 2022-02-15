@@ -5,10 +5,26 @@ export default class ArticleController {
   #service;
   #event;
 
+
   constructor() {
     this.#service = new ArticleService();
     this.#event = new ArticleEvent();
   }
+
+  readAll = async (req, res, next) => {
+    try {
+      const articles = await this.#service.getAll();
+
+      res.status(200).render("home", {
+        articles,
+        title: "Blog App",
+        token: res.locals.token,
+        user: res.locals.user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 
   create = async (req, res, next) => {
     try {
