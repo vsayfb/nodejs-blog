@@ -1,17 +1,20 @@
 import UserEvent from "../events/user.js";
 import AuthService from "../services/auth.js";
 import UserService from "../services/user.js";
+import MailService from "../services/mail.js";
 import { generateToken } from "../utils/token.js";
 
 export default class UserController {
   #service;
   #event;
   #auth;
+  #mail;
 
   constructor() {
     this.#service = new UserService();
     this.#event = new UserEvent();
     this.#auth = new AuthService();
+    this.#mail = new MailService();
   }
 
   register = async (req, res, next) => {

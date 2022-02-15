@@ -10,9 +10,9 @@ route.get("/", middlewares.detectUser, app.home);
 
 route.get("/logs", middlewares.detectUser, app.getLogs);
 
-route.get("/login", middlewares.verifyAuth, app.login);
+route.get("/login", middlewares.redirectIfToken, app.login);
 
-route.get("/signUp", middlewares.verifyAuth, app.signUp);
+route.get("/signUp", middlewares.redirectIfToken, app.signUp);
 
 route.get("/addTag", middlewares.routeProtection, app.addTag);
 

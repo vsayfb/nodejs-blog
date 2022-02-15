@@ -1,3 +1,5 @@
+import jsonwebtoken from "jsonwebtoken";
+
 export default (req, res, next) => {
   const { token } = req.cookies;
   if (token) {
