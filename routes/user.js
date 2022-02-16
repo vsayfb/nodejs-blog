@@ -7,6 +7,8 @@ const router = express.Router();
 
 const user = new UserController();
 
+router.get("/forgotPassword", user.findEmailForForgotPsw);
+
 router.post(
   "/signUp",
   middlewares.validation(createUserValidate),
@@ -15,9 +17,9 @@ router.post(
 
 router.put("/refreshPassword", middlewares.isAuth, user.refreshPsw);
 
-router.post("/checkCode", middlewares.isAuth, user.checkCodeForNewPassword);
+router.post("/checkCode", user.checkCodeForNewPassword);
 
-router.patch("/newPassword", middlewares.isAuth, user.newPassword);
+router.patch("/newPassword", user.newPassword);
 
 router.post("/login", user.login);
 

@@ -61,7 +61,7 @@ export default class UserController {
 
       await this.#mail.sendCodeToMail(user.email, code);
 
-      return res.status(301).send(`/checkCode?user=${user._id}&code=${_id}`);
+      return res.status(200).send(`/checkCode?user=${user._id}&code=${_id}`);
     } catch (error) {
       next(error);
     }
@@ -73,11 +73,26 @@ export default class UserController {
 
       await RandomNumber.verifySubmittedCode(code, req.body.code);
 
-      res.status(301).send(`/newPassword?user=${user}&code=${code}`);
+      res.status(200).send(`/newPassword?user=${user}&code=${code}`);
     } catch (error) {
       next(error);
     }
   };
+
+  findEmailForForgotPsw = async (req, res, next) => {
+    try {
+      const user = await this.#service.findByEmail(req.query.email);
+
+      const { num: code, _id } = await RandomNumber.create();
+
+      await this.#mail.sendCodeToMail(user.email, code);
+
+      res.status(200).send(`/checkCode?user=${user._id}&code=${_id}`);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   newPassword = async (req, res, next) => {
     try {
       const { code, user } = req.headers;

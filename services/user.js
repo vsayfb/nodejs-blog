@@ -1,4 +1,3 @@
-import { compare } from "bcrypt";
 import User from "../models/user.js";
 import { ErrorHandler } from "../utils/errors.js";
 import { comparePassword } from "../utils/password.js";
@@ -25,5 +24,12 @@ export default class UserService {
   }
   async update(_id, doc) {
     return await User.findByIdAndUpdate(_id, doc);
+  }
+  async findByEmail(email) {
+    const user = await User.findOne({ email });
+
+    if (!user) throw new ErrorHandler("Email Not Found!", 400);
+
+    return user;
   }
 }

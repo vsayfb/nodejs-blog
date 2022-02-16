@@ -22,8 +22,9 @@ route.get(
 );
 route.get("/dashboard/:user", middlewares.routeProtection, app.dashboard);
 route.get("/update/:article", middlewares.routeProtection, app.updateArticle);
-route.get("/checkCode", middlewares.detectUser, app.checkCodePage);
-route.get("/newPassword", middlewares.detectUser, app.newPasswordPage);
+route.get("/checkCode", app.checkCodePage);
+route.get("/newPassword", app.newPasswordPage);
+route.get("/forgotPassword", app.forgotPasswordPage);
 
 route.get("/logout", app.logout);
 

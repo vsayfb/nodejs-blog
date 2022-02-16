@@ -6,7 +6,7 @@ async function sendRequest(e) {
     body: new FormData(e.target),
   });
 
-  if (result.status == 301) window.location = await result.text();
+  if (result.status == 200) window.location = await result.text();
   else alert(await result.text());
 }
 
@@ -24,7 +24,7 @@ async function handleSubmit(e) {
     method: "POST",
     body: new FormData(e.target),
   });
-  if (result.status == 301) window.location = await result.text();
+  if (result.status == 200) window.location = await result.text();
   else alert(await result.text());
 }
 
@@ -44,4 +44,19 @@ async function newPassword(e) {
   });
   if (result.status == 200) window.location = "/logout";
   else alert(await result.text());
+}
+async function forgotPassword(e) {
+  e.preventDefault();
+  const email = e.target.querySelector("input[name=email]").value;
+
+  if (!email) alert("Please enter an email.");
+  else {
+    const response = await fetch(`/user/forgotPassword?email=${email}`, {
+      method: "GET",
+    });
+
+    const result = await response.text();
+    if (response.status == 200) window.location = `${result}`;
+    else alert(result);
+  }
 }

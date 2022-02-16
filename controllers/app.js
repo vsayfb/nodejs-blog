@@ -98,13 +98,6 @@ export default class AppController {
     });
   };
   checkCodePage = (req, res, next) => {
-    if (
-      !mongoose.isValidObjectId(req.query.code) ||
-      !mongoose.isValidObjectId(req.query.user)
-    ) {
-      return res.redirect("/login");
-    }
-
     res.status(200).render("checkCodePage", { user: res.locals.user });
   };
 
@@ -118,7 +111,9 @@ export default class AppController {
 
     res.status(200).render("newPasswordPage", { user: res.locals.user });
   };
-
+  forgotPasswordPage = (req, res, next) => {
+    res.status(200).render("forgotPassword", {});
+  };
   logout = (req, res, next) => {
     res.clearCookie("token");
     res.redirect("/");
